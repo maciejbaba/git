@@ -38,5 +38,5 @@ def commit(daysToGoBack):
     repo.index.commit(message, author=actor, committer=actor)
 
 
-for dayNum in range(0, 10):
+for dayNum in range(0, 35):
     commit(dayNum)
