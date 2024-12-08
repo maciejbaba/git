@@ -3,7 +3,23 @@ import git.exc as GitExceptions  # GitPython
 import os  # Python Core
 import sys  # Python Core
 import datetime  # Python Core
+import argparse  # Python Core
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("daysToGoBack", type=int, help="Number of days to go back")
+    args = parser.parse_args()
+
+    if len(sys.argv) < 2:
+        print("Number of days to go back must be provided")
+        sys.exit(1)
+
+    if args.daysToGoBack < 0:
+        print("Number of days to go back must be positive")
+        sys.exit(1)
+
+    for i in range(0, args.daysToGoBack):
+        commit(i)
 
 def commit(daysToGoBack):
     your_timestamp = (
@@ -38,5 +54,5 @@ def commit(daysToGoBack):
     repo.index.commit(message, author=actor, committer=actor)
 
 
-for dayNum in range(0, 35):
-    commit(dayNum)
+if __name__ == "__main__":
+    main()
